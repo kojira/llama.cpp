@@ -72,6 +72,11 @@ class MainActivity(
 
         val models = listOf(
             Downloadable(
+                "LLM-jp-3 1.8B (F16, 3.7GiB)",
+                Uri.parse("https://huggingface.co/alfredplpl/llm-jp-3-1.8b-instruct-gguf/resolve/main/llm-jp-3-1.8b-instruct-F16.gguf?download=true"),
+                File(extFilesDir, "llm-jp-3-1.8b-instruct-F16.gguf"),
+            ),
+            Downloadable(
                 "Phi-2 7B (Q4_0, 1.6 GiB)",
                 Uri.parse("https://huggingface.co/ggml-org/models/resolve/main/phi-2/ggml-model-q4_0.gguf?download=true"),
                 File(extFilesDir, "phi-2-q4_0.gguf"),

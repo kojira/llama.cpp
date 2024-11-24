@@ -36,7 +36,7 @@ class LLamaAndroid {
         }
     }.asCoroutineDispatcher()
 
-    private val nlen: Int = 64
+    private val nlen: Int = 512
 
     private external fun log_to_android()
     private external fun load_model(filename: String): Long
@@ -118,7 +118,7 @@ class LLamaAndroid {
     fun send(message: String): Flow<String> = flow {
         when (val state = threadLocalState.get()) {
             is State.Loaded -> {
-                val ncur = IntVar(completion_init(state.context, state.batch, message, nlen))
+                val ncur = IntVar(completion_init(state.context, state.batch, "<s>\n\n### 指示:\n" + message + "\n\n### 応答:\n", nlen))
                 while (ncur.value <= nlen) {
                     val str = completion_loop(state.context, state.batch, state.sampler, nlen, ncur)
                     if (str == null) {
